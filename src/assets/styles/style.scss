@@ -23,63 +23,6 @@ a {
     text-decoration: none;
 }
 
-/* Clases para colores de fondo */
-.bg-primary {
-    background-color: $primary !important;
-}
-
-.bg-secondary {
-    background-color: $secondary !important;
-}
-
-.bg-accent {
-    background-color: $accent !important;
-}
-
-.bg-highlight {
-    background-color: $highlight !important;
-}
-
-.bg-white {
-    background-color: $white !important;
-}
-
-.bg-dark {
-    background-color: $dark !important;
-}
-
-/* Clases para colores de texto */
-.text-primary {
-    color: $primary !important;
-}
-
-.text-secondary {
-    color: $secondary !important;
-}
-
-.text-accent {
-    color: $accent !important;
-}
-
-.text-highlight {
-    color: $highlight !important;
-}
-
-.text-dark {
-    color: $dark !important;
-}
-
-/* Clases para colores de texto en fondo claro */
-.text-white {
-    color: $white !important;
-}
-
-/* Clases para colores de texto en fondo oscuro */
-.text-black {
-    color: $black !important;
-}
-
-
 .container {
     width: 100%;
     max-width: $breakpoint-xl;
