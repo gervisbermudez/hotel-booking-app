@@ -27,8 +27,6 @@ import Button from "./Button.vue";
 
 header {
     height: 60px;
-    position: relative;
-    z-index: 2;
 
     .links {
         gap: 3rem;

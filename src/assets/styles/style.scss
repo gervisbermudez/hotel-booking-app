@@ -21,6 +21,10 @@ h5 {
 
 a {
     text-decoration: none;
+
+    &:hover {
+        text-decoration: underline;
+    }
 }
 
 .container {
@@ -40,4 +44,8 @@ a {
 
 .items-center {
     align-items: center;
+}
+
+.flex-column {
+    flex-direction: column;
 }
