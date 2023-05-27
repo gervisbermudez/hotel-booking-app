@@ -3,11 +3,10 @@
         <slot />
     </button>
 </template>
-<script lang="ts">
-export default {
 
-}
+<script setup lang="ts">
 </script>
+
 <style lang="scss" scoped>
 @import "../assets/styles/vars.scss";
 
@@ -21,7 +20,7 @@ button {
     border: 1px solid $white;
     cursor: pointer;
     // Transición para el hover
-    transition: background-color 0.3s, color 0.3s;
+    transition: background-color 0.4s, color 0.4s border-color 0.4s;
 
     &:hover {
         background-color: darken($white, 20%);
@@ -30,12 +29,12 @@ button {
 
     &.primary {
         background-color: $primary;
-        color: $black;
+        color: $white;
         border-color: $primary;
 
         &:hover {
-            background-color: darken($primary, 20%);
-            border-color: darken($primary, 20%);
+            background-color: lighten($primary, 10%);
+            border-color: lighten($primary, 10%);
         }
 
     }

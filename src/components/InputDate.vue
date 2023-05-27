@@ -1,12 +1,40 @@
 <template>
     <div class="input-container">
-        <input type="date" placeholder="" class="input-date" :id="id" :name="name" ref="dateInput" />
+        <input v-model="value" type="date" class="input-date" :id="id" :name="name" ref="inputDate" />
     </div>
 </template>
 
 <script lang="ts">
 export default {
-    props: ["id", "name"],
+    props: ["id", "name", 'inputValue'],
+    emits: ['update:value'],
+    computed: {
+        value: {
+            get() {
+                return this.getFormatDate(this.inputValue)
+            },
+            set(value: any) {
+                this.$emit('update:value', this.name, this.getParseStringDate(value))
+            }
+        }
+    },
+    methods: {
+        getFormatDate: (date: Date | null): string => {
+            if (!date) return "";
+            const mes = date.getMonth() + 1;
+            const dia = date.getDate();
+            const anio = date.getFullYear();
+            return `${anio}-${mes.toString().padStart(2, '0')}-${dia.toString().padStart(2, '0')}`;
+        },
+        getParseStringDate: (dateString: string) => {
+            const parts = dateString.split("-");
+            const year = parseInt(parts[0]);
+            const month = parseInt(parts[1]) - 1; // Restamos 1 ya que los meses en JavaScript comienzan desde 0
+            const day = parseInt(parts[2]);
+            return new Date(year, month, day);
+
+        }
+    }
 };
 </script>
 

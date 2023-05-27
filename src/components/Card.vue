@@ -2,7 +2,7 @@
     <div class="card-container">
         <div class="card-header">
             <div class="header-overlay"></div>
-            <div class="header-bg" style="background-image: url('/img/hotels/1/image5.png');"></div>
+            <div class="header-bg" style="background-image: url('/img/hotels/1/default.png');"></div>
         </div>
         <div class="card-content">
             <div class="flex space-between items-center">
@@ -13,25 +13,16 @@
                 </div>
             </div>
             <div class="card-description">
-                <div class="description">
-                    1901 Thornridge Cir. Shiloh, Hawaii 81063
-                </div>
-                <div class="price">
-                    $ 328.85
-                </div>
+                <slot name="content" />
             </div>
             <div class="card-footer">
-                <Button class="secondary">Reservar</Button>
+                <slot name="footer" />
             </div>
         </div>
     </div>
 </template>
 
-<script setup lang="ts">
-import Button from "./Button.vue";
-</script>
-
-<style scoped lang="scss">
+<style lang="scss">
 @import "../assets/styles/vars.scss";
 
 .card-container {
@@ -45,7 +36,6 @@ import Button from "./Button.vue";
 
     .card-header {
         position: relative;
-
 
         .header-overlay {
             position: absolute;

@@ -1,11 +1,3 @@
-<script setup lang="ts">
-import Button from './components/Button.vue';
-import Header from './components/Header.vue';
-import InputDate from "./components/InputDate.vue";
-import Select from "./components/Select.vue";
-import Card from './components/Card.vue';
-</script>
-
 <template>
   <div class="top-banner">
     <div class="banner-overlay"></div>
@@ -16,33 +8,114 @@ import Card from './components/Card.vue';
     <div class="form">
       <div class="form-container flex space-between">
         <div class="form-control">
-          <label for="user-type">Tipo de Usuario</label>
-          <Select id="type-user" name="type-user" />
+          <label for="user-type">Tipo de usuario</label>
+          <Select id="type-user" name="type-user" :user-type="userType" @update:value="handleSelectChange" />
         </div>
         <div class="form-control">
-          <label for="initial_date">Fecha Inicio</label>
-          <input-date id="initial_date" name="initial_date" />
+          <label for="initial_date">Fecha inicio</label>
+          <input-date id="initial_date" name="initial_date" :input-value="dates.initial_date"
+            @update:value="handleInputChange" />
         </div>
         <div class="form-control">
-          <label for="final_date">Fecha Inicio</label>
-          <input-date id="final_date" name="final_date" />
+          <label for="final_date">Fecha inicio</label>
+          <input-date id="final_date" name="final_date" :input-value="dates.final_date"
+            @update:value="handleInputChange" />
         </div>
         <div class="form-control">
           <div>&nbsp;</div>
-          <Button class="primary">Buscar</Button>
+          <Button @click="handleSearchBooking" class="primary">Buscar</Button>
         </div>
       </div>
     </div>
     <div class="results">
       <h1 class="title">Top Results</h1>
-      <div class="cards flex space-between">
-        <Card />
-        <Card />
-        <Card />
+      <Spinner v-if="loading" />
+      <div class="cards flex space-between" v-else>
+        <Card>
+          <template #content>
+            <div class="description">
+              1901 Thornridge Cir. Shiloh, Hawaii 81063
+            </div>
+            <div class="price">
+              $ 328.85
+            </div>
+          </template>
+          <template #footer>
+            <Button class="secondary">Reservar</Button>
+          </template>
+        </Card>
+        <Card>
+          <template #content>
+            <div class="description">
+              1901 Thornridge Cir. Shiloh, Hawaii 81063
+            </div>
+            <div class="price">
+              $ 328.85
+            </div>
+          </template>
+          <template #footer>
+            <Button class="secondary">Reservar</Button>
+          </template>
+        </Card>
+        <Card>
+          <template #content>
+            <div class="description">
+              1901 Thornridge Cir. Shiloh, Hawaii 81063
+            </div>
+            <div class="price">
+              $ 328.85
+            </div>
+          </template>
+          <template #footer>
+            <Button class="secondary">Reservar</Button>
+          </template>
+        </Card>
       </div>
     </div>
   </div>
 </template>
+
+<script setup lang="ts">
+import { reactive, ref } from 'vue';
+import { storeToRefs } from 'pinia';
+import { useHotelsStore } from "./stores/hotels.store";
+
+import Button from './components/Button.vue';
+import Header from './components/Header.vue';
+import InputDate from "./components/InputDate.vue";
+import Select from "./components/Select.vue";
+import Card from './components/Card.vue';
+import Spinner from "./components/Spinner.vue";
+
+const store = useHotelsStore();
+const { loading } = storeToRefs(store);
+const userType = ref<"regular" | "rewards">("regular");
+
+interface Dates {
+  initial_date: Date | null;
+  final_date: Date | null;
+  [key: string]: any
+}
+
+const dates: Dates = reactive({
+  initial_date: null,
+  final_date: null
+})
+
+const handleSelectChange = (data: string) => { userType.value = data as "regular" | "rewards" }
+const handleInputChange = (name: string, data: string) => {
+  dates[name] = data;
+}
+
+const handleSearchBooking = () => {
+  dates.initial_date
+    && dates.final_date
+    && store.calculateTotalCost(userType.value, dates.initial_date, dates.final_date).then((result) => {
+      console.log({ result });
+    })
+}
+
+</script>
 
 <style lang="scss">
 @import "./assets/styles/vars.scss";
@@ -112,7 +185,10 @@ import Card from './components/Card.vue';
     .title {
       color: $white;
     }
-  }
 
+    .cards {
+      margin-top: 60px;
+    }
+  }
 }
 </style>

@@ -81,7 +81,7 @@ export const getHotels = (): Promise<Hotel[]> => {
   return new Promise<Hotel[]>((resolve, reject) => {
     setTimeout(() => {
       resolve(hotels);
-    }, 1000);
+    }, 2000);
   });
 };
 
