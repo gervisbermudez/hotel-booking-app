@@ -11,6 +11,7 @@ export const hotels = [
       regular: 90,
       rewards: 80,
     },
+    photos: ["/img/hotels/1/image5.png"],
   },
   {
     id: 2,
@@ -24,6 +25,7 @@ export const hotels = [
       regular: 60,
       rewards: 50,
     },
+    photos: ["/img/hotels/1/image5.png"],
   },
   {
     id: 3,
@@ -37,5 +39,6 @@ export const hotels = [
       regular: 150,
       rewards: 40,
     },
+    photos: ["/img/hotels/1/image5.png"],
   },
 ];

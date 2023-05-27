@@ -12,4 +12,5 @@ export interface Hotel {
     regular: number;
     rewards: number;
   };
+  photos: string[];
 }
