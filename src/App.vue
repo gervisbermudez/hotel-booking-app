@@ -28,55 +28,66 @@
       </div>
     </div>
     <div class="results">
-      <h1 class="title">Top Results</h1>
+      <h1 class="title" v-if="searchResult == null">Our Hotels</h1>
+      <h1 class="title" v-else>Best Result</h1>
       <Spinner v-if="loading" />
-      <div class="cards flex space-between" v-else>
-        <Card>
-          <template #content>
-            <div class="description">
-              1901 Thornridge Cir. Shiloh, Hawaii 81063
-            </div>
-            <div class="price">
-              $ 328.85
-            </div>
-          </template>
-          <template #footer>
-            <Button class="secondary">Reservar</Button>
-          </template>
-        </Card>
-        <Card>
-          <template #content>
-            <div class="description">
-              1901 Thornridge Cir. Shiloh, Hawaii 81063
-            </div>
-            <div class="price">
-              $ 328.85
-            </div>
-          </template>
-          <template #footer>
-            <Button class="secondary">Reservar</Button>
-          </template>
-        </Card>
-        <Card>
-          <template #content>
-            <div class="description">
-              1901 Thornridge Cir. Shiloh, Hawaii 81063
-            </div>
-            <div class="price">
-              $ 328.85
-            </div>
-          </template>
-          <template #footer>
-            <Button class="secondary">Reservar</Button>
-          </template>
-        </Card>
+      <div v-else>
+        <div class="cards flex space-between" v-if="searchResult == null">
+          <Card v-for="(hotel, index) in  hotelsList" :key="index" :name="hotel.name" :rating="hotel.rating"
+            :photos="hotel.photos">
+            <template #content>
+              <div class="description">
+                {{ hotel.location }}
+              </div>
+              <div class="rates">
+                <div class="rates-title">Rates regular customer</div>
+                <div>Weekdays: <span class="price">$ {{ hotel.weekdayRates.regular }}</span>
+                  <div>Weekends: <span class="price">$ {{ hotel.weekendRates.regular }}</span>
+                  </div>
+                </div>
+              </div>
+              <br />
+              <div class="rates">
+                <div class="rates-title">Rates rewards customer</div>
+                <div>Weekdays: <span class="price">$ {{ hotel.weekdayRates.rewards }}</span>
+                  <div>Weekends: <span class="price">$ {{ hotel.weekendRates.rewards }}</span>
+                  </div>
+                </div>
+              </div>
+            </template>
+            <template #footer>
+              <Button class="primary">Details</Button>
+            </template>
+          </Card>
+        </div>
+        <div v-else>
+          <Card :name="searchResult.hotel.name" :rating="searchResult.hotel.rating" :photos="searchResult.hotel.photos">
+            <template #content>
+              <div class="description">
+                {{ searchResult.hotel.location }}
+              </div>
+              <div class="rates-title">
+                {{ searchResult.countWeekDays }} days and {{ searchResult.countWeekends }} weekend days
+              </div>
+              <div class="price">
+                $ {{ searchResult.totalCost }}
+              </div>
+            </template>
+            <template #footer>
+              <Button class="secondary">Book</Button>
+            </template>
+          </Card>
+          <div class="view-list">
+            <a href="#!" @click="resetSearch">View All Hotels</a>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { reactive, ref } from 'vue';
+import { onMounted, reactive, ref } from 'vue';
 import { storeToRefs } from 'pinia';
 import { useHotelsStore } from "./stores/hotels.store";
 
@@ -86,10 +97,9 @@ import InputDate from "./components/InputDate.vue";
 import Select from "./components/Select.vue";
 import Card from './components/Card.vue';
 import Spinner from "./components/Spinner.vue";
-
-const store = useHotelsStore();
-const { loading } = storeToRefs(store);
-const userType = ref<"regular" | "rewards">("regular");
+import { TotalCost } from './models/Hotels';
+import { getHotels } from './services';
+import { Hotel } from './models/Hotels';
 
 interface Dates {
   initial_date: Date | null;
@@ -97,12 +107,32 @@ interface Dates {
   [key: string]: any
 }
 
+const store = useHotelsStore();
+const { loading } = storeToRefs(store);
+const userType = ref<"regular" | "rewards">("regular");
+
+const hotelsList = ref<Hotel[] | []>([]);
+
+const searchResult = ref<TotalCost | null>(null);
+
 const dates: Dates = reactive({
   initial_date: null,
   final_date: null
 })
 
-const handleSelectChange = (data: string) => { userType.value = data as "regular" | "rewards" }
+onMounted(() => {
+  /**
+    Fetch Data
+  **/
+  getHotels().then((result) => {
+    hotelsList.value = result;
+  })
+})
+
+const handleSelectChange = (data: string) => {
+  userType.value = data as "regular" | "rewards"
+}
+
 const handleInputChange = (name: string, data: string) => {
   dates[name] = data;
 }
@@ -111,8 +141,15 @@ const handleSearchBooking = () => {
   dates.initial_date
     && dates.final_date
     && store.calculateTotalCost(userType.value, dates.initial_date, dates.final_date).then((result) => {
-      console.log({ result });
+      if (result) {
+        console.log({ result });
+        searchResult.value = result[0];
+      }
     })
+}
+
+const resetSearch = () => {
+  searchResult.value = null
 }
 
 </script>
@@ -188,6 +225,21 @@ const handleSearchBooking = () => {
 
     .cards {
       margin-top: 60px;
+    }
+  }
+
+  .view-list {
+    padding: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    a {
+      color: $primary;
+
+      &:hover {
+        text-decoration: none;
+      }
     }
   }
 }

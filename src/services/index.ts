@@ -1,43 +1,3 @@
-/* 
-import { Hotel } from "../models/Hotels";
-
-export function calculateTotalCost(
-  userType: "regular" | "rewards",
-  startDate: Date,
-  endDate: Date
-): void {
-  let resultByHotels: any = {};
-
-  hotels.forEach((hotel: Hotel) => {
-    let totalCost = 0;
-    const currentDate = new Date(startDate);
-
-    while (currentDate <= endDate) {
-      const isWeekend =
-        currentDate.getDay() === 0 || currentDate.getDay() === 6; // 0: Domingo, 6: Sábado
-
-      const rate = isWeekend
-        ? hotel.weekendRates[userType]
-        : hotel.weekdayRates[userType];
-
-      totalCost += rate;
-
-      currentDate.setDate(currentDate.getDate() + 1); // Avanzar al siguiente día
-    }
-
-    resultByHotels[hotel.name] = totalCost;
-  });
-
-  return resultByHotels;
-}
- */
-
-/* export const calculateTotalCost = (
-  userType: "regular" | "rewards",
-  startDate: Date,
-  endDate: Date
-): void => {}; */
-
 import { hotels } from "../data/hotels";
 import { Hotel } from "../models/Hotels";
 
@@ -81,7 +41,7 @@ export const getHotels = (): Promise<Hotel[]> => {
   return new Promise<Hotel[]>((resolve, reject) => {
     setTimeout(() => {
       resolve(hotels);
-    }, 2000);
+    }, 1000);
   });
 };
 

@@ -1,16 +1,11 @@
 import { defineStore } from "pinia";
-import { Hotel } from "../models/Hotels";
+import { Hotel, TotalCost } from "../models/Hotels";
 import { getHotels } from "../services";
 
 export interface State {
   hotels: Hotel[];
   hotel: Hotel | null;
   loading: boolean;
-}
-
-export interface TotalCost {
-  hotel: Hotel;
-  totalCost: number;
 }
 
 export const useHotelsStore = defineStore("store", {
@@ -37,7 +32,7 @@ export const useHotelsStore = defineStore("store", {
       userType: "regular" | "rewards",
       startDate: Date,
       endDate: Date
-    ) {
+    ): Promise<TotalCost[] | undefined> {
       this.loading = true;
       try {
         const response = await getHotels();
@@ -45,6 +40,8 @@ export const useHotelsStore = defineStore("store", {
         let resultByHotels: TotalCost[] = [];
         hotels.forEach((hotel: Hotel) => {
           let totalCost = 0;
+          let countWeekends = 0;
+          let countWeekDays = 0;
           const currentDate = new Date(startDate);
           while (currentDate <= endDate) {
             const isWeekend =
@@ -54,14 +51,20 @@ export const useHotelsStore = defineStore("store", {
               : hotel.weekdayRates[userType];
             totalCost += rate;
             currentDate.setDate(currentDate.getDate() + 1); // Avanzar al siguiente día
+            isWeekend ? countWeekends++ : countWeekDays++;
           }
           resultByHotels.push({
             hotel,
             totalCost,
+            countWeekends,
+            countWeekDays,
           });
         });
         return resultByHotels.sort((a, b) => {
-          return b.totalCost - a.totalCost;
+          if (a.totalCost === b.totalCost) {
+            return b.hotel.rating - a.hotel.rating;
+          }
+          return a.totalCost - b.totalCost;
         });
       } catch (error) {
         console.error("Error fetching data:", error);
