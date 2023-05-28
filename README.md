@@ -1,18 +1,83 @@
-# Vue 3 + TypeScript + Vite
+# README - Aplicación de Booking de Hotel
 
-This template should help get you started developing with Vue 3 and TypeScript in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+Este es el README para la aplicación de Booking de Hotel. A continuación, se detallan los puntos relevantes sobre la aplicación y cómo utilizarla.
 
-## Recommended IDE Setup
+## Características de la Aplicación
 
-- [VS Code](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
+- Búsqueda de hoteles: Los usuarios pueden buscar hoteles según su tipo de usuario y un rango de fechas especificado.
+- Interfaz intuitiva: La aplicación cuenta con una interfaz de usuario amigable y fácil de usar.
+- Uso de Vue.js: La aplicación ha sido desarrollada utilizando el framework Vue.js, lo cual facilita el desarrollo y la interactividad de la interfaz de usuario.
+- Gestión de estado con Pinia: Para el manejo del estado de la aplicación, se ha utilizado Pinia, una biblioteca de gestión de estado basada en Vue 3 que facilita el almacenamiento y la recuperación de datos en la aplicación.
+- Pruebas con ViteTest: Las pruebas unitarias y de integración se han realizado utilizando ViteTest, una biblioteca de pruebas optimizada para proyectos Vite.
+- Estilos con SCSS: Para la estilización de la aplicación, se ha utilizado SCSS (Sass), un preprocesador de CSS que permite escribir estilos más eficientes y reutilizables.
 
-## Type Support For `.vue` Imports in TS
+## Instalación y Configuración
 
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin) to make the TypeScript language service aware of `.vue` types.
+Sigue los siguientes pasos para instalar y ejecutar la aplicación en tu entorno local:
 
-If the standalone TypeScript plugin doesn't feel fast enough to you, Volar has also implemented a [Take Over Mode](https://github.com/johnsoncodehk/volar/discussions/471#discussioncomment-1361669) that is more performant. You can enable it by the following steps:
+1. Clona este repositorio en tu máquina:
+   ```
+   git clone https://github.com/gervisbermudez/hotel-booking-app
+   ```
 
-1. Disable the built-in TypeScript Extension
-   1. Run `Extensions: Show Built-in Extensions` from VSCode's command palette
-   2. Find `TypeScript and JavaScript Language Features`, right click and select `Disable (Workspace)`
-2. Reload the VSCode window by running `Developer: Reload Window` from the command palette.
+2. Navega a la carpeta del proyecto:
+   ```
+   cd nombre-repositorio
+   ```
+
+3. Instala las dependencias utilizando npm o yarn:
+   ```
+   npm install
+   ```
+   o
+   ```
+   yarn install
+   ```
+
+4. Inicia la aplicación en modo de desarrollo:
+   ```
+   npm run dev
+   ```
+   o
+   ```
+   yarn dev
+   ```
+
+5. Abre tu navegador web y visita `http://localhost:3000` para ver la aplicación en funcionamiento.
+
+## Estructura del Proyecto
+
+El proyecto sigue una estructura común utilizada en aplicaciones Vue.js:
+
+- `public/`: Contiene los archivos estáticos de la aplicación.
+- `src/`: Contiene el código fuente de la aplicación.
+  - `assets/`: Archivos de recursos como imágenes, iconos, etc.
+  - `components/`: Componentes reutilizables de la aplicación.
+  - `store/`: Configuración y módulos de Pinia para la gestión del estado.
+  - `utils/`: Utilidades y funciones auxiliares.
+  - `App.vue`: Componente principal de la aplicación.
+  - `main.ts`: Punto de entrada de la aplicación.
+
+## Pruebas
+
+El proyecto incluye pruebas unitarias y de integración para garantizar el correcto funcionamiento de la aplicación. Las pruebas se encuentran en la carpeta `tests/` y se pueden ejecutar utilizando el siguiente comando:
+
+```
+npm run test
+```
+o
+```
+yarn test
+```
+
+## Diseño
+
+El diseño de la aplicación de Booking de Hotel se encuentra disponible en Figma. Puedes acceder al diseño completo haciendo clic en el siguiente enlace: [Diseño en Figma](https://www.figma.com/file/GUIAyDNZFzeP1pILyqUfgg/Hotel-Booking?type=design&node-id=4%3A6&t=GsKHwV025CFBD3vF-1)
+
+
+## Contribución
+
+Si deseas contribuir a este proyecto, por favor sigue los siguientes pasos:
+
+1. Realiza un fork de este repositorio.
+2. Crea una rama con una descripción clara de la nueva funcionalidad o corrección
