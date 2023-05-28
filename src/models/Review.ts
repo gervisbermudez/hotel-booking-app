@@ -5,4 +5,5 @@ export interface Review {
   user: string;
   date: string;
   hotel_id: number;
+  hotel_name: string | undefined;
 }

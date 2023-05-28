@@ -2,7 +2,7 @@ export const reviews = [
   {
     id: 1,
     rating: 4,
-    comment: "¡Excelente servicio!",
+    comment: "Excellent service!",
     user: "John Doe",
     date: "2023-05-15",
     hotel_id: 1,
@@ -10,7 +10,7 @@ export const reviews = [
   {
     id: 2,
     rating: 5,
-    comment: "Increíble experiencia, sin duda volveré",
+    comment: "Incredible experience, will definitely come back",
     user: "Jane Smith",
     date: "2023-05-17",
     hotel_id: 2,
@@ -18,7 +18,7 @@ export const reviews = [
   {
     id: 3,
     rating: 3,
-    comment: "Nada mal, pero esperaba más",
+    comment: "Not bad, but expected more",
     user: "Robert Johnson",
     date: "2023-05-18",
     hotel_id: 3,
@@ -26,7 +26,7 @@ export const reviews = [
   {
     id: 4,
     rating: 5,
-    comment: "El mejor hotel en el que me he hospedado",
+    comment: "The best hotel I've stayed in",
     user: "Emily Williams",
     date: "2023-05-19",
     hotel_id: 1,
@@ -34,7 +34,7 @@ export const reviews = [
   {
     id: 5,
     rating: 2,
-    comment: "Muy decepcionante, no lo recomendaría",
+    comment: "Very disappointing, would not recommend",
     user: "Michael Brown",
     date: "2023-05-20",
     hotel_id: 2,
@@ -42,7 +42,7 @@ export const reviews = [
   {
     id: 6,
     rating: 4,
-    comment: "Buena relación calidad-precio",
+    comment: "Good value for money",
     user: "Jennifer Davis",
     date: "2023-05-21",
     hotel_id: 3,
@@ -50,7 +50,7 @@ export const reviews = [
   {
     id: 7,
     rating: 5,
-    comment: "¡Increíbles instalaciones y personal amable!",
+    comment: "Amazing facilities and friendly staff!",
     user: "William Miller",
     date: "2023-05-22",
     hotel_id: 1,
@@ -58,7 +58,7 @@ export const reviews = [
   {
     id: 8,
     rating: 3,
-    comment: "Podría mejorar en algunos aspectos",
+    comment: "Could improve in some aspects",
     user: "Sophia Taylor",
     date: "2023-05-23",
     hotel_id: 2,
@@ -66,7 +66,7 @@ export const reviews = [
   {
     id: 9,
     rating: 4,
-    comment: "Gran ubicación y comodidades",
+    comment: "Great location and amenities",
     user: "Alexander Wilson",
     date: "2023-05-24",
     hotel_id: 3,
@@ -74,7 +74,7 @@ export const reviews = [
   {
     id: 10,
     rating: 5,
-    comment: "Experiencia de lujo, volveré definitivamente",
+    comment: "Luxury experience, will definitely come back",
     user: "Olivia Anderson",
     date: "2023-05-25",
     hotel_id: 1,
@@ -82,7 +82,7 @@ export const reviews = [
   {
     id: 11,
     rating: 3,
-    comment: "Buen lugar para relajarse",
+    comment: "Nice place to relax",
     user: "Emma Thompson",
     date: "2023-05-26",
     hotel_id: 2,
@@ -90,7 +90,7 @@ export const reviews = [
   {
     id: 12,
     rating: 4,
-    comment: "Servicio amable y atento",
+    comment: "Friendly and attentive service",
     user: "Daniel Davis",
     date: "2023-05-27",
     hotel_id: 3,
@@ -98,7 +98,7 @@ export const reviews = [
   {
     id: 13,
     rating: 5,
-    comment: "Me encantó la comida del restaurante",
+    comment: "Loved the food at the restaurant",
     user: "Mia Clark",
     date: "2023-05-28",
     hotel_id: 1,
@@ -106,57 +106,9 @@ export const reviews = [
   {
     id: 14,
     rating: 2,
-    comment: "Mala experiencia con el servicio de limpieza",
+    comment: "Bad experience with the cleaning service",
     user: "Ethan Robinson",
     date: "2023-05-29",
-    hotel_id: 2,
-  },
-  {
-    id: 15,
-    rating: 4,
-    comment: "Habitaciones espaciosas y cómodas",
-    user: "Ava Garcia",
-    date: "2023-05-30",
-    hotel_id: 3,
-  },
-  {
-    id: 16,
-    rating: 5,
-    comment: "Recomendaría este hotel a mis amigos",
-    user: "Noah Lee",
-    date: "2023-06-01",
-    hotel_id: 1,
-  },
-  {
-    id: 17,
-    rating: 3,
-    comment: "No cumplió mis expectativas",
-    user: "Sofia Martinez",
-    date: "2023-06-02",
-    hotel_id: 2,
-  },
-  {
-    id: 18,
-    rating: 4,
-    comment: "Servicio al cliente excepcional",
-    user: "Logan Hernandez",
-    date: "2023-06-03",
-    hotel_id: 3,
-  },
-  {
-    id: 19,
-    rating: 5,
-    comment: "Volveré en mi próximo viaje",
-    user: "Luna Lopez",
-    date: "2023-06-04",
-    hotel_id: 1,
-  },
-  {
-    id: 20,
-    rating: 2,
-    comment: "Mal mantenimiento de las instalaciones",
-    user: "Mateo Gonzalez",
-    date: "2023-06-05",
     hotel_id: 2,
   },
 ];

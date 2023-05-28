@@ -134,7 +134,15 @@ export const getHotelByID = (id: number): Promise<Hotel> => {
 export const getReviews = (): Promise<Review[]> => {
   return new Promise<Review[]>((resolve, reject) => {
     setTimeout(() => {
-      resolve(reviews);
+      resolve(
+        reviews.map((review) => {
+          return {
+            ...review,
+            hotel_name: hotels.find((hotel) => hotel.id === review.hotel_id)
+              ?.name,
+          };
+        })
+      );
     }, 1000);
   });
 };

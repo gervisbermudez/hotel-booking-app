@@ -127,7 +127,55 @@
         </div>
       </div>
     </section>
+    <section class="container">
+      <div class="reviews">
+        <h2>Reviews</h2>
+        <div class="review-list">
+          <div class="review-item" v-for="(item) in reviews" :key="item.id">
+            <div class="review-container">
+              <div class="review-header">
+                <img :src="`/img/users/avatar${item.id}.png`" />
+                <div>
+                  <div class="review-username">{{ item.user }}</div>
+                  <div>{{ item.hotel_name }}</div>
+                </div>
+                <div>
+                  <div class="review-date">{{ getTimeAgo(item.date) }}</div>
+                  <div class="flex gap-1">
+                    <div class="flex">
+                      <div v-for="n in item.rating" :key="n" class="star"></div>
+                    </div>
+                    {{ item.rating }}
+                  </div>
+                </div>
+              </div>
+              <div class="review-comment">
+                {{ item.comment }}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
   </div>
+  <footer>
+    <div class="container flex space-between items-center">
+      <div><img :src="logo" /></div>
+      <div class="copyright">Copyright © 1996–2023 Hotel Booking ™. Todos los derechos reservados.</div>
+      <div class="flex gap-2">
+        <div class="links">
+          <a href="#!">Contact Us</a>
+          <a href="#!">Destination</a>
+          <a href="#!">Article</a>
+        </div>
+        <div class="links">
+          <a href=" #!">Lakewood</a>
+          <a href="#!">Bridgewood</a>
+          <a href="#!">Ridgewood</a>
+        </div>
+      </div>
+    </div>
+  </footer>
 </template>
 
 <script setup lang="ts">
@@ -145,6 +193,8 @@ import { TotalCost } from './models/Hotels';
 import { getHotels, getReviews } from './services';
 import { Hotel } from './models/Hotels';
 import { Review } from "./models/Review";
+import { getTimeAgo } from './utils/index';
+import logo from "./assets/images/brand-logo.svg";
 
 interface Dates {
   initial_date: Date | null;
@@ -173,7 +223,7 @@ onMounted(() => {
   });
 
   getReviews().then((result) => {
-    reviews.value = result;
+    reviews.value = result.splice(0, 6);
   });
 
 })
@@ -239,7 +289,6 @@ const resetSearch = () => {
 .app-content {
   z-index: 2;
   position: relative;
-  padding-bottom: 2rem;
 
   .form {
     padding: 20px;
@@ -341,7 +390,7 @@ const resetSearch = () => {
       position: relative;
       width: 523px;
       height: 220px;
-      box-shadow: 3px 4px 8px 5px rgba(152, 152, 152, 0.9);
+      box-shadow: 3px 3px 9px 3px rgb(156 156 156 / 60%);
       border-radius: 12px;
       overflow: hidden;
     }
@@ -350,9 +399,97 @@ const resetSearch = () => {
       position: relative;
       width: 342px;
       height: 190px;
-      box-shadow: 3px 4px 8px 5px rgba(152, 152, 152, 0.9);
+      box-shadow: 3px 3px 9px 3px rgb(156 156 156 / 60%);
       border-radius: 12px;
       overflow: hidden;
+    }
+  }
+
+  .reviews {
+    h2 {
+      margin: 3rem 0;
+    }
+
+    max-width: 1066px;
+    margin: auto;
+
+    .review-list {
+      display: flex;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .review-item {
+      width: 40%;
+
+      .review-container {
+        display: flex;
+        gap: 1rem;
+        flex-direction: column;
+        max-width: 300px;
+      }
+
+      .review-comment {
+        color: $gray;
+      }
+
+      .review-header {
+        display: flex;
+        position: relative;
+        padding-left: 70px;
+        justify-content: space-between;
+        align-items: center;
+        min-height: 60px;
+
+
+        &>div {
+          height: 60px;
+          display: flex;
+          flex-direction: column;
+          justify-content: space-around;
+        }
+
+        img {
+          position: absolute;
+          left: 0;
+          top: 0;
+        }
+
+        .review-username {
+          font-weight: 600;
+        }
+
+        .review-date {
+          text-align: right;
+        }
+      }
+    }
+  }
+}
+
+footer {
+  margin-top: 3rem;
+  height: 120px;
+  background: $primary;
+
+  .container {
+    height: 100%;
+    color: $white;
+  }
+
+  .copyright {
+    font-size: 0.8rem;
+    font-weight: 300;
+  }
+
+  .links {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+
+    a {
+      color: $white;
+      text-decoration: none;
     }
   }
 }

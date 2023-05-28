@@ -85,11 +85,7 @@ export default {
             color: $white;
         }
 
-        .star {
-            background-image: url("/img/icons/star.svg");
-            width: 18px;
-            height: 18px;
-        }
+
     }
 
     .card-content {
