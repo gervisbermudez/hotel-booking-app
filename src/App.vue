@@ -298,6 +298,7 @@ const resetSearch = () => {
 
   .results {
     max-width: 1066px;
+    min-height: 500px;
     margin: 80px auto 0;
 
     .title {
