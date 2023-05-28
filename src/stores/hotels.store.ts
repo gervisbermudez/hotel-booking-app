@@ -1,10 +1,12 @@
 import { defineStore } from "pinia";
 import { Hotel, TotalCost } from "../models/Hotels";
-import { getHotels } from "../services";
+import { getHotels, getReviews } from "../services";
+import { Review } from "../models/Review";
 
 export interface State {
   hotels: Hotel[];
   hotel: Hotel | null;
+  reviews: Review[];
   loading: boolean;
 }
 
@@ -13,6 +15,7 @@ export const useHotelsStore = defineStore("store", {
     return {
       hotels: [],
       hotel: null,
+      reviews: [],
       loading: false,
     };
   },
@@ -66,6 +69,30 @@ export const useHotelsStore = defineStore("store", {
           }
           return a.totalCost - b.totalCost;
         });
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      } finally {
+        this.loading = false;
+      }
+    },
+    async fetchReviews() {
+      this.loading = true;
+      try {
+        const response = await getReviews();
+        this.reviews = response;
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      } finally {
+        this.loading = false;
+      }
+    },
+    async fetchReviewsByHotelID(hotel_id: number) {
+      this.loading = true;
+      try {
+        const response = await getReviews();
+        this.reviews = response.filter(
+          (review) => review.hotel_id === hotel_id
+        );
       } catch (error) {
         console.error("Error fetching data:", error);
       } finally {

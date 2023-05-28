@@ -1,5 +1,7 @@
 import { hotels } from "../data/hotels";
+import { reviews } from "../data/reviews";
 import { Hotel } from "../models/Hotels";
+import { Review } from "../models/Review";
 
 /**
  * @api {GET} /hotels Obtiene la lista de hoteles
@@ -99,6 +101,40 @@ export const getHotelByID = (id: number): Promise<Hotel> => {
           message: "Hotel not found",
         });
       }
+    }, 1000);
+  });
+};
+
+/**
+ * @api {GET} /reviews Obtiene la lista de reseñas
+ * @apiName GetReviews
+ * @apiGroup Reviews
+ *
+ * @apiDescription Esta API simula un llamado a una API real para obtener la lista de reseñas.
+ * Debido a que es una simulación, se agrega un retraso de 1 segundo antes de devolver la respuesta.
+ *
+ * @apiSuccess {Object[]} reviews Lista de reseñas.
+ * @apiSuccess {number} reviews.id ID de la reseña.
+ * @apiSuccess {number} reviews.rating Rating de la reseña.
+ * @apiSuccess {string} reviews.comment Comentario de la reseña.
+ * @apiSuccess {string} reviews.user Nombre y apellido del usuario que realizó la reseña.
+ * @apiSuccess {string} reviews.date Fecha de la reseña.
+ *
+ * @apiExample {curl} Ejemplo de uso:
+ *    curl -X GET https://api.example.com/reviews
+ *
+ * @apiSuccessExample Respuesta exitosa:
+ *    HTTP/1.1 200 OK
+ *    [
+ *      { "id": 1, "rating": 4, "comment": "¡Excelente servicio!", "user": "John Doe", "date": "2023-05-15" },
+ *      // ... más reseñas ...
+ *    ]
+ */
+
+export const getReviews = (): Promise<Review[]> => {
+  return new Promise<Review[]>((resolve, reject) => {
+    setTimeout(() => {
+      resolve(reviews);
     }, 1000);
   });
 };
