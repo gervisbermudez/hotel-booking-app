@@ -8,11 +8,14 @@ export const getFormatDate = (date: Date | null): string => {
     .padStart(2, "0")}`;
 };
 
-export const getParseStringDate = (dateString: string) => {
+export const getParseStringDate = (dateString: string): Date | undefined => {
   const parts = dateString.split("-");
   const year = parseInt(parts[0]);
   const month = parseInt(parts[1]) - 1; // Restamos 1 ya que los meses en JavaScript comienzan desde 0
   const day = parseInt(parts[2]);
+  if (day > 31 || month > 12) {
+    return undefined;
+  }
   return new Date(year, month, day);
 };
 
