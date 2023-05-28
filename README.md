@@ -1,7 +1,5 @@
 # README - Aplicación de Booking de Hotel
 
-Este es el README para la aplicación de Booking de Hotel. A continuación, se detallan los puntos relevantes sobre la aplicación y cómo utilizarla.
-
 ## Características de la Aplicación
 
 - Búsqueda de hoteles: Los usuarios pueden buscar hoteles según su tipo de usuario y un rango de fechas especificado.
